@@ -186,7 +186,7 @@ class AttachmentService
     public function getAbsolutePath(AttachmentInterface $attachment): string
     {
         $resolved = $this->varDirectory->getAbsolutePath($attachment->getFilePath());
-        $basePath = $this->varDirectory->getAbsolutePath(self::BASE_PATH);
+        $basePath = rtrim($this->varDirectory->getAbsolutePath(self::BASE_PATH), '/') . '/';
 
         if (!str_starts_with($resolved, $basePath)) {
             throw new LocalizedException(__('Invalid attachment path.'));
